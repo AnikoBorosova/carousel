@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by AnikoBorosova (http://jsbin.com/rulayuf/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+
+<head>
+<meta name="description" content="carousel - clickable slideshow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet'>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <title>Carousel - clickable slideshow</title>
+<style id="jsbin-css">
+/* === GENERAL === */
+
+* {
+  box-sizing: border-box;
+}
+
+/* === CAROUSEL === */
+
+.slider {
+  position: relative;
+  width: 960px;
+  height: 470px;
+  border: 1px solid #ddd;
+  margin: 50px auto;
+}
+
+.slide {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.active-slide {
+    display: block;
+}
+
+/* === SLIDER NAV === */
+
+.slider-nav {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.arrow-prev {
+  margin-right: 45px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 9px;
+}
+
+.arrow-next {
+  margin-left: 45px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 9px;
+}
+
+.slider-dots {
+  list-style: none;
+  display: inline-block;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.slider-dots li {
+  color: #bbbcbc;
+  display: inline;
+  font-size: 30px;
+  margin-right: 5px;
+}
+
+.slider-dots li.active-dot {
+  color: #363636;
+}
+
+</style>
+</head>
+
+<body>
+  <div class="slider">
+    <div class="slide active-slide">
+     <img src="https://github.com/AnikoBorosova/carousel/blob/master/images/1.png?raw=true" alt="pelican">
+    </div>
+    <div class="slide">
+      <img src="https://github.com/AnikoBorosova/carousel/blob/master/images/2.png?raw=true" alt="Perth city">
+    </div>
+    <div class="slide">
+      <img src="https://github.com/AnikoBorosova/carousel/blob/master/images/3.png?raw=true" alt="quokka">
+    </div>
+    <div class="slide">
+      <img src="https://github.com/AnikoBorosova/carousel/blob/master/images/4.png?raw=true" alt="beach">
+    </div>
+  </div>
+
+  <div class="slider-nav">
+    <a href="#" class="arrow-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+    <ul class="slider-dots">
+      <li class="dot active-dot">&bull;</li>
+      <li class="dot">&bull;</li>
+      <li class="dot">&bull;</li>
+      <li class="dot">&bull;</li>
+    </ul>
+    <a href="#" class="arrow-next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+  </div>
+<script id="jsbin-javascript">
+var main = function() {
+
+  $('.arrow-next').click(function() {
+    var currentSlide = $('.active-slide');
+    var nextSlide = currentSlide.next();
+
+    var currentDot = $('.active-dot');
+    var nextDot = currentDot.next();
+
+    if (nextSlide.length == 0) {
+      nextSlide = $('.slide').first();
+      nextDot = $('.dot').first();
+    }
+
+    currentSlide.fadeOut(600).removeClass('active-slide');
+    nextSlide.fadeIn(600).addClass('active-slide');
+
+    currentDot.removeClass('active-dot');
+    nextDot.addClass('active-dot');
+  });
+
+  $('.arrow-prev').click(function() {
+    var currentSlide = $('.active-slide');
+    var prevSlide = currentSlide.prev();
+
+    var currentDot = $('.active-dot');
+    var prevDot = currentDot.prev();
+
+    if (prevSlide.length == 0) {
+      prevSlide = $('.slide').last();
+      prevDot = $('.dot').last();
+    }
+
+    currentSlide.fadeOut(600).removeClass('active-slide');
+    prevSlide.fadeIn(600).addClass('active-slide');
+
+    currentDot.removeClass('active-dot');
+    prevDot.addClass('active-dot');
+  });
+
+
+};
+
+
+$(document).ready(main);
+</script>
+</body>
+
+</html>
